@@ -1,4 +1,5 @@
 import csv
+import os
 
 def query_snp_rsID(filename, rsID_query):
     """
@@ -52,8 +53,10 @@ def main():
         query_snp_rsID(filepath, rsID_query)
     elif query_type == 'csv':
         csv_query_file = input("Enter the path to your CSV file with SNP rsIDs: ")
-        output_csv_file = input("Enter the path for the output CSV file with genotypes: ")
+        # Automatically generate the name for the output CSV file
+        output_csv_file = os.path.splitext(csv_query_file)[0] + '_genotypes.csv'
         query_snps_from_csv(filepath, csv_query_file, output_csv_file)
+        print(f"Output has been written to {output_csv_file}")
     else:
         print("Invalid input. Please enter 'rsID' or 'csv' to proceed.")
 
